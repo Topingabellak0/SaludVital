@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud Vital | Farmacia Online</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Pantalla de login (centrada) -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-icon">
+                <i class="fas fa-mortar-pestle"></i>
+            </div>
+            <h2>LOGIN</h2>
+            <p class="welcome-text">welcome to the website</p>
+            <div id="loginMessage" class="message"></div>
+            <div class="input-group">
+                <i class="fas fa-user input-icon"></i>
+                <input type="email" class="input-field" id="loginEmail" placeholder="Username / Email">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" class="input-field" id="loginPass" placeholder="Password">
+            </div>
+            <div class="options-row">
+                <label class="remember-check">
+                    <input type="checkbox" id="rememberCheck"> Remember
+                </label>
+                <a id="showForgotBtn" class="forgot-link">Forget Password ?</a>
+            </div>
+            <button class="btn-login" id="loginBtn">LOGIN</button>
+            <div class="register-link">
+                Don't have an account? <a id="showRegisterBtn">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vista Usuario -->
+    <div class="user-view" id="userView">
+        <div class="view-header">
+            <button class="back-btn" id="logoutUserBtn"><i class="fas fa-arrow-left"></i> Cerrar sesión</button>
+            <div class="logo-area">
+                <i class="fas fa-mortar-pestle"></i> Salud Vital
+            </div>
+            <div class="user-icons">
+                <i class="fas fa-heart" id="favoritesIcon"></i>
+                <i class="fas fa-user-circle" id="profileIcon"></i>
+            </div>
+        </div>
+        
+        <div class="search-section">
+            <div class="search-wrapper">
+                <input class="search-input" type="text" id="searchInput" placeholder="🔍 Buscar medicamentos, productos de salud..." autocomplete="off">
+                <button class="search-btn" id="searchBtn">Buscar</button>
+            </div>
+            <div id="suggestionsBox" class="suggestions-box"></div>
+        </div>
+
+        <div class="categories" id="categoriesContainer"></div>
+
+        <h3 class="section-title">🌟 Productos destacados</h3>
+        <div class="product-grid" id="productGrid"></div>
+
+        <div class="promo-banner" id="promoBanner">
+            <h3>🎯 Promociones especiales</h3>
+            <p>Cargando promociones...</p>
+        </div>
+
+        <div class="user-footer">
+            <div><i class="fas fa-shield-alt"></i> Cuidamos tu salud · Envíos a todo el país</div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vista Admin -->
+    <div class="admin-view" id="adminView">
+        <div class="view-header">
+            <button class="back-btn" id="logoutAdminBtn"><i class="fas fa-arrow-left"></i> Cerrar sesión</button>
+            <div class="logo-area">
+                <i class="fas fa-user-md"></i> Salud Vital | Admin
+            </div>
+            <div class="admin-badge"><i class="fas fa-chart-line"></i> Panel de gestión</div>
+        </div>
+
+        <div class="admin-menu">
+            <div class="admin-menu-item active" data-tab="add">➕ Agregar productos</div>
+            <div class="admin-menu-item" data-tab="inventory">📦 Actualizar inventario</div>
+            <div class="admin-menu-item" data-tab="edit">✏️ Editar productos</div>
+            <div class="admin-menu-item" data-tab="promos">🎯 Promociones</div>
+            <div class="admin-menu-item" data-tab="admins">👥 Administradores</div>
+        </div>
+
+        <div class="admin-panel">
+            <!-- Agregar productos -->
+            <div class="admin-card" id="tab-add">
+                <h3>➕ Agregar nuevo producto</h3>
+                <div class="form-group">
+                    <label>Nombre del producto</label>
+                    <input type="text" class="form-control" id="prodName" placeholder="Ej: Paracetamol 500mg">
+                </div>
+                <div class="form-group">
+                    <label>Precio ($)</label>
+                    <input type="number" class="form-control" id="prodPrice" placeholder="299.99">
+                </div>
+                <div class="form-group">
+                    <label>Imagen</label>
+                    <input type="file" class="form-control" id="prodImage" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select class="form-control" id="prodCategory">
+                        <option>Medicamentos</option>
+                        <option>Vitaminas</option>
+                        <option>Cuidado Personal</option>
+                        <option>Primeros Auxilios</option>
+                        <option>Bienestar</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Stock</label>
+                    <input type="number" class="form-control" id="prodStock" placeholder="50">
+                </div>
+                <div class="form-group">
+                    <label>Emoji / Icono</label>
+                    <input type="text" class="form-control" id="prodIcon" placeholder="💊">
+                </div>
+                <button class="btn" id="addProductBtn">Guardar producto</button>
+            </div>
+
+            <!-- Actualizar inventario -->
+            <div class="admin-card" id="tab-inventory" style="display: none;">
+                <h3>📦 Actualizar inventario</h3>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <input type="text" id="searchInventoryInput" class="form-control" placeholder="🔍 Buscar producto por nombre...">
+                </div>
+                <table class="inventory-table">
+                    <thead><tr><th>Producto</th><th>Stock</th><th>Ajustar</th></tr></thead>
+                    <tbody id="inventoryBody"></tbody>
+                </table>
+                <button class="btn" id="updateInventoryBtn">Actualizar stock</button>
+            </div>
+
+            <!-- Editar productos -->
+            <div class="admin-card" id="tab-edit" style="display: none;">
+                <h3>✏️ Editar productos</h3>
+                <div class="form-group"><input type="text" id="searchEditInput" class="form-control" placeholder="🔍 Buscar producto..."></div>
+                <table class="inventory-table"><thead><tr><th>Producto</th><th>Precio</th><th>Imagen</th><th>Acciones</th></tr></thead><tbody id="editBody"></tbody></table>
+            </div>
+
+            <!-- Promociones -->
+            <div class="admin-card" id="tab-promos" style="display: none;">
+                <h3>🎯 Gestionar promociones</h3>
+                <div id="promosList"></div>
+                <button class="btn" id="createPromoBtn">+ Crear promoción</button>
+            </div>
+
+            <!-- Administradores -->
+            <div class="admin-card" id="tab-admins" style="display: none;">
+                <h3>👥 Gestionar Administradores</h3>
+                <div class="add-admin-box">
+                    <h4>➕ Agregar nuevo administrador</h4>
+                    <div class="form-group"><label>Nombre completo</label><input type="text" id="newAdminName" class="form-control" placeholder="Dr. Juan Pérez"></div>
+                    <div class="form-group"><label>Correo electrónico</label><input type="email" id="newAdminEmail" class="form-control" placeholder="admin@saludvital.com"></div>
+                    <div class="form-group"><label>Contraseña</label><input type="password" id="newAdminPass" class="form-control" placeholder="••••••••"></div>
+                    <button class="btn" id="createAdminBtn">Crear administrador</button>
+                </div>
+                <h4>📋 Administradores registrados</h4>
+                <table class="inventory-table"><thead><tr><th>Nombre</th><th>Correo</th><th>Fecha</th><th>Acciones</th></tr></thead><tbody id="adminsListBody"></tbody></table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón flotante solicitar producto -->
+    <button class="request-floating" id="requestBtn" style="display: none;">
+        <i class="fas fa-prescription-bottle"></i> Solicitar producto
+    </button>
+
+    <!-- Modales -->
+    <div class="modal" id="registerModal"><div class="modal-content"><div class="close-modal" onclick="closeModal('registerModal')"><i class="fas fa-times"></i></div><h3>📝 Registro de usuario</h3>
+        <div class="form-group"><label>Nombre completo</label><input type="text" class="form-control" id="regName" placeholder="María González"></div>
+        <div class="form-group"><label>Correo electrónico</label><input type="email" class="form-control" id="regEmail" placeholder="maria@email.com"></div>
+        <div class="form-group"><label>Contraseña</label><input type="password" class="form-control" id="regPass" placeholder="••••••••"></div>
+        <div class="form-group"><label>Pregunta de seguridad</label><select class="form-control" id="regSecurityQuestion"><option>¿Cuál es el nombre de tu mamá?</option><option>¿Cuál es tu color favorito?</option><option>¿Cuál es tu comida favorita?</option></select></div>
+        <div class="form-group"><label>Respuesta de seguridad</label><input type="text" class="form-control" id="regSecurityAnswer" placeholder="Tu respuesta"></div>
+        <button class="btn" id="registerConfirmBtn">Registrarse</button>
+    </div></div>
+
+    <div class="modal" id="requestModal"><div class="modal-content"><div class="close-modal" onclick="closeModal('requestModal')"><i class="fas fa-times"></i></div><h3>📢 Solicitar producto</h3><p>Te notificaremos cuando esté disponible</p>
+        <div class="form-group"><label>Producto</label><input type="text" class="form-control" id="requestProduct" placeholder="Ej: Ibuprofeno 600mg"></div>
+        <div class="form-group"><label>Tu email</label><input type="email" class="form-control" id="requestEmail" placeholder="tucorreo@email.com"></div>
+        <button class="btn" id="submitRequestBtn">Enviar solicitud</button>
+    </div></div>
+
+    <div class="modal" id="editPromoModal"><div class="modal-content"><div class="close-modal" onclick="closeModal('editPromoModal')"><i class="fas fa-times"></i></div><h3>✏️ Editar promoción</h3><input type="hidden" id="editPromoId">
+        <div class="form-group"><label>Título</label><input type="text" class="form-control" id="editPromoTitle"></div>
+        <div class="form-group"><label>Descripción</label><textarea class="form-control" id="editPromoDesc" rows="3"></textarea></div>
+        <div class="form-group"><label>Descuento (%)</label><input type="number" class="form-control" id="editPromoDiscount" value="0"></div>
+        <div class="form-group"><label>Válido desde</label><input type="date" class="form-control" id="editPromoValidFrom"></div>
+        <div class="form-group"><label>Válido hasta</label><input type="date" class="form-control" id="editPromoValidTo"></div>
+        <div class="form-group"><label><input type="checkbox" id="editPromoActive" checked> Activa</label></div>
+        <button class="btn" id="savePromoEditBtn">Guardar cambios</button>
+    </div></div>
+
+    <div class="modal" id="forgotModal"><div class="modal-content"><div class="close-modal" onclick="closeModal('forgotModal')"><i class="fas fa-times"></i></div><h3>🔑 Restaurar contraseña</h3><p>Responde tu pregunta de seguridad para restablecer tu contraseña.</p><button id="showSecurityRecoveryBtn" class="btn-outline">🔐 Recuperar con pregunta de seguridad</button></div></div>
+
+    <div class="modal" id="securityRecoveryModal"><div class="modal-content"><div class="close-modal" onclick="closeModal('securityRecoveryModal')"><i class="fas fa-times"></i></div><h3>🔐 Recuperar contraseña</h3>
+        <div id="securityStep1"><div class="form-group"><label>Correo electrónico</label><input type="email" class="form-control" id="recoveryEmail" placeholder="tuemail@ejemplo.com"></div><button class="btn" id="getSecurityQuestionBtn">Continuar</button></div>
+        <div id="securityStep2" style="display:none;"><div class="form-group"><label id="displaySecurityQuestion">Pregunta de seguridad</label><input type="text" class="form-control" id="securityAnswer" placeholder="Tu respuesta"></div><div class="form-group"><label>Nueva contraseña</label><input type="password" class="form-control" id="newPasswordRecovery" placeholder="Nueva contraseña"></div><div class="form-group"><label>Confirmar contraseña</label><input type="password" class="form-control" id="confirmPasswordRecovery" placeholder="Confirmar contraseña"></div><button class="btn" id="resetWithSecurityBtn">Restablecer contraseña</button></div>
+        <div id="securityStep3" style="display:none;"><p class="success" style="color:#1a6b4a;">✅ Contraseña actualizada.</p><button class="btn" onclick="closeModal('securityRecoveryModal')">Cerrar</button></div>
+    </div></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
